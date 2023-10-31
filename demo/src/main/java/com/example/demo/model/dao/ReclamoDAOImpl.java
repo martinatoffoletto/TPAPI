@@ -62,7 +62,7 @@ public class ReclamoDAOImpl implements daos{
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public void delete(Long id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
         Query<Reclamo> theQuery = currentSession.createQuery("delete from Reclamo where numero=:numeroR");

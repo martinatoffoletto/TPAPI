@@ -60,7 +60,7 @@ public class UnidadDAOImpl implements daos{
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public void delete(Long id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
         Query<Unidad> theQuery = currentSession.createQuery("delete from Unidad where id=:id");

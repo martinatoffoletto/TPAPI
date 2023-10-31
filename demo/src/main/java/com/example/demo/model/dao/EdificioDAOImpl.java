@@ -68,7 +68,7 @@ public class EdificioDAOImpl implements daos{
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public void delete(Long id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
         Query<Edificio> theQuery = currentSession.createQuery("delete from Edificio where id=:idEdificio");

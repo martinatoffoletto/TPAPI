@@ -24,11 +24,11 @@ public class AreaComun {
     private List<Reclamo> reclamos;
 
 
-    public AreaComun(String nombre, String descripcion, Edificio edificio, List<Reclamo> reclamos) {
+    public AreaComun(String nombre, String descripcion, Edificio edificio) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.edificio = edificio;
-        this.reclamos = reclamos;
+
     }
 
     public AreaComun() {
