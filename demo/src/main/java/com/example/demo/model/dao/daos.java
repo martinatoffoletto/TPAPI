@@ -12,6 +12,6 @@ public interface daos {
     public Object findById(Long id);
     public void save(Object obj);
     public void update(Object obj);
-    public void delete(int id);
+    public  void delete(Long id);
 
 }
