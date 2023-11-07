@@ -58,7 +58,7 @@ public class AreaComunDAOImpl implements daos{
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public void delete(Long id) {
         Session currentSession = entityManager.unwrap(Session.class);
         Query theQuery = currentSession.createQuery("delete from AreaComun where id=:idAreaComun");
         theQuery.setParameter("idAreaComun", id);

@@ -22,8 +22,6 @@ public class UsuarioDAOImpl implements daos{
     private EntityManager entityManager;
 
 
-    /*
-    @Override
     @Transactional(readOnly = true)
     public Usuario encontrarUsuario(String username, String password) {
         Session currentSession = entityManager.unwrap(Session.class);
@@ -51,8 +49,6 @@ public class UsuarioDAOImpl implements daos{
         return isPasswordMatch;
     }
 
-     */
-
 
     @Override
     @Transactional(readOnly = true)
@@ -60,17 +56,17 @@ public class UsuarioDAOImpl implements daos{
         Session currentSession = entityManager.unwrap(Session.class);
 
         Query<Usuario> getQuery = currentSession.createQuery("from Usuario", Usuario.class);
-        List<Usuario> Usuarios = getQuery.getResultList();
-        List<Object> unidad= Collections.singletonList(Usuarios);
-        return unidad;
+        List<Usuario> usuarios = getQuery.getResultList();
+        List<Object> usuario= Collections.singletonList(usuarios);
+        return usuario;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Object findById(Long id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Usuario unidad = currentSession.get(Usuario.class, id);
-        return unidad;
+        Usuario usuario = currentSession.get(Usuario.class, id);
+        return usuario;
     }
 
 
@@ -78,8 +74,8 @@ public class UsuarioDAOImpl implements daos{
     @Transactional
     public void save(Object obj) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Usuario unidad=(Usuario) obj;
-        currentSession.persist(unidad);
+        Usuario usuario=(Usuario) obj;
+        currentSession.persist(usuario);
 
     }
 
@@ -87,8 +83,8 @@ public class UsuarioDAOImpl implements daos{
     @Transactional
     public void update(Object obj) {
         Session session = entityManager.unwrap(Session.class);
-        Usuario unidad= (Usuario) obj;
-        session.update(unidad);
+        Usuario usuario= (Usuario) obj;
+        session.update(usuario);
 
     }
 
@@ -96,7 +92,7 @@ public class UsuarioDAOImpl implements daos{
     @Transactional
     public void delete(Long id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Unidad> theQuery = currentSession.createQuery("delete from Usuario where id=:id");
+        Query<Usuario> theQuery = currentSession.createQuery("delete from Usuario where id=:id");
         theQuery.setParameter("id", id);
         theQuery.executeUpdate();
 
