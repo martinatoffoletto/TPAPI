@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "reclamos_tabla")
 public class Reclamo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @PrimaryKeyJoinColumn
     @Column(name="numero", nullable=false)
     private Long numero;

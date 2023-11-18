@@ -18,7 +18,7 @@ public class Unidad {
     private boolean alquilada;
 
     @ManyToOne
-    @JoinColumn(name = "edificio_id")
+    @JoinColumn(name = "edificio_id", referencedColumnName = "id")
     private Edificio edificio;
     @ManyToOne
     @JoinColumn(name = "usuario_id")

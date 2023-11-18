@@ -1,18 +1,23 @@
 package com.example.demo.model.dao;
 
+import com.example.demo.model.entity.Foto;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.model.entity.Foto;
 import org.springframework.data.repository.query.FluentQuery;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+
 public class FotoRepository implements JpaRepository<Foto, Long> {
+    @PersistenceContext
+    private EntityManager entityManager;
     @Override
     public void flush() {
 

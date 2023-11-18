@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/reclamos")
 public class reclamosController {
     private IReclamoService reclamoService;
 
-    @GetMapping("/edificios")
+    @GetMapping("/reclamosTodos")
     public List<ReclamoDTO> findAll() {
         List<Reclamo> reclamos = reclamoService.findAll();
         List<ReclamoDTO> reclamoDTOS = new ArrayList<>();
@@ -31,7 +31,7 @@ public class reclamosController {
     }
 
 
-    @GetMapping("/edificios/{edificioId}")
+    @GetMapping("/reclamos/{reclamoId}")
     public ResponseEntity<?> getReclamo(@PathVariable Long reclamoId) {
         Reclamo reclamo = reclamoService.findById(reclamoId);
 
@@ -47,7 +47,7 @@ public class reclamosController {
 
 
     @GetMapping("/reclamosParam")
-    public ResponseEntity<?> getEdificioParam(@RequestParam("reclamoId") Long reclamoId) {
+    public ResponseEntity<?> getReclamoParam(@RequestParam("reclamoId") Long reclamoId) {
         Reclamo reclamo = reclamoService.findById(reclamoId);
 
         if (reclamo == null) {

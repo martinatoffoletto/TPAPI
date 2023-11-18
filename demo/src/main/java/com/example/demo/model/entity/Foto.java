@@ -1,27 +1,13 @@
 package com.example.demo.model.entity;
 
 import java.util.Arrays;
+
 import jakarta.persistence.*;
 
-
-@Entity
 @Embeddable
 public class Foto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @PrimaryKeyJoinColumn
-    @Column(name="id", nullable=false)
-    private int numero;
+    private Long id_foto;
 
-    public Foto() {
-        // TODO Auto-generated constructor stub
-    }
-
-    @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
-    private Long id;
     @Lob
     @Column(
             columnDefinition = "LONGBLOB"
@@ -29,16 +15,12 @@ public class Foto {
     private byte[] datosImagen;
 
 
+    public Foto() {
+        // TODO Auto-generated constructor stub
+    }
+
     public Foto(byte[] datosImagen) {
         this.datosImagen = datosImagen;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public byte[] getDatosImagen() {
@@ -50,7 +32,6 @@ public class Foto {
     }
 
     public String toString() {
-        return "Imagen [id=" + this.id + ", datosImagen=" + Arrays.toString(this.datosImagen) + "]";
+        return "Imagen [datosImagen=" + Arrays.toString(this.datosImagen) + "]";
     }
-
 }

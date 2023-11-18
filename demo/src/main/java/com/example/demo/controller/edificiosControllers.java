@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/edificios")
 public class edificiosControllers  {
 
     private IEdificioService edificioService;
 
-    @GetMapping("/edificios")
+    @GetMapping("/edificiosTodos")
     public List<EdificioDTO> findAll() {
         List<Edificio> edificios = edificioService.findAll();
         List<EdificioDTO> edificioDTOS = new ArrayList<>();

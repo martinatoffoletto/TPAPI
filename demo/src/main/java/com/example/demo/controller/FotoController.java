@@ -39,9 +39,10 @@ public class FotoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> download(@PathVariable Long id) {
-        Foto foto = fotoService.findById(id);
-        if (foto != null){
-            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(foto.getDatosImagen());
+        Optional<Foto> foto = fotoService.findById(id);
+        if (foto.isPresent()){
+            byte[] imageBytes = foto.get().getDatosImagen();
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
         } else {
             return ResponseEntity.notFound().build();
         }

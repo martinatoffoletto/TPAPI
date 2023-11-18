@@ -66,6 +66,7 @@ public class ReclamoDAOImpl implements daos{
         Session currentSession = entityManager.unwrap(Session.class);
 
         Query<Reclamo> theQuery = currentSession.createQuery("delete from Reclamo where numero=:numeroR");
+
         theQuery.setParameter("numeroR", id);
         theQuery.executeUpdate();
 
