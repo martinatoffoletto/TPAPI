@@ -1,5 +1,6 @@
 package com.example.demo.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -18,8 +19,12 @@ public class Edificio {
     @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
     private List<AreaComun> areasComunes;
 
+
+
     public Edificio(String direccion) {
         this.direccion = direccion;
+        unidades = new ArrayList<>();
+        areasComunes = new ArrayList<>();
     }
 
     public Edificio() {
@@ -56,6 +61,7 @@ public class Edificio {
     public void setAreasComunes(List<AreaComun> areasComunes) {
         this.areasComunes = areasComunes;
     }
+
 
     @Override
     public String toString() {

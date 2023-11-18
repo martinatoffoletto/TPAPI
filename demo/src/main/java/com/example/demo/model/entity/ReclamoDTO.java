@@ -1,14 +1,16 @@
 package com.example.demo.model.entity;
 
 public class ReclamoDTO {
-    private Unidad unidad;
+    private UnidadDTO unidad;
+    private AreaComunDTO areaComun;
     private String descripcion;
     private Foto foto;
     private EstadoReclamo estado;
     private Usuario usuario;
 
-    public ReclamoDTO(Unidad unidad, String descripcion, Foto foto, EstadoReclamo estado, Usuario usuario) {
+    public ReclamoDTO(UnidadDTO unidad, AreaComunDTO areaComun, String descripcion, Foto foto, EstadoReclamo estado, Usuario usuario) {
         this.unidad = unidad;
+        this.areaComun = areaComun;
         this.descripcion = descripcion;
         this.foto = foto;
         this.estado = estado;
@@ -19,11 +21,11 @@ public class ReclamoDTO {
 
     }
 
-    public Unidad getUnidad() {
+    public UnidadDTO getUnidad() {
         return unidad;
     }
 
-    public void setUnidad(Unidad unidad) {
+    public void setUnidad(UnidadDTO unidad) {
         this.unidad = unidad;
     }
 
@@ -58,4 +60,8 @@ public class ReclamoDTO {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public AreaComunDTO getAreaComun() { return areaComun; }
+
+    public void setAreaComun(AreaComunDTO areaComun) { this.areaComun = areaComun; }
 }

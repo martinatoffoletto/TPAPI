@@ -92,7 +92,7 @@ public class UsuarioDAOImpl implements daos{
     @Transactional
     public void delete(Long id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Usuario> theQuery = currentSession.createQuery("delete from Usuario where id=:id");
+        Query theQuery = currentSession.createQuery("delete from Usuario where id=:id");
         theQuery.setParameter("id", id);
         theQuery.executeUpdate();
 

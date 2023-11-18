@@ -4,22 +4,22 @@ import java.util.Optional;
 
 import com.example.demo.model.entity.Foto;
 import com.example.demo.model.dao.FotoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FotoServiceImpl implements IFotoService{
 
-    @Autowired
     private FotoRepository fotoRepository;
 
     @Override
-    public Foto findById(Long id) {
-        return null;
+    public Optional<Foto> findById(Long id) {
+        return fotoRepository.findById(id);
     }
 
     @Override
-    public void save(Foto usuario) {
-
+    public Foto save(Foto imagen) {
+        fotoRepository.save(imagen);
+        return imagen;
     }
+
 }

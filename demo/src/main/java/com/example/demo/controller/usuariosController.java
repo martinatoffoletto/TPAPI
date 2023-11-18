@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@RestController
+@RequestMapping("/usuarios")
 public class usuariosController {
 
     private IUsuarioService usuarioService;
 
-    @GetMapping("/usuarios")
+    @GetMapping("/usuariosTodos")
     public List<UsuarioDTO> findAll() {
         List<Usuario> usuarios = usuarioService.findAll();
         List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
@@ -30,7 +33,7 @@ public class usuariosController {
     }
 
 
-    @GetMapping("/edificios/{edificioId}")
+    @GetMapping("/usuarios/{usuarioId}")
     public ResponseEntity<?> getUsuario(@PathVariable Long usuarioId) {
         Usuario usuario = usuarioService.findById(usuarioId);
 
@@ -45,8 +48,8 @@ public class usuariosController {
     }
 
 
-    @GetMapping("/edificiosParam")
-    public ResponseEntity<?> getEdificioParam(@RequestParam("usuarioId") Long usuarioId) {
+    @GetMapping("/usuariosParam")
+    public ResponseEntity<?> getUsuarioParam(@RequestParam("usuarioId") Long usuarioId) {
         Usuario usuario = usuarioService.findById(usuarioId);
 
         if (usuario == null) {
@@ -59,7 +62,7 @@ public class usuariosController {
 
     }
 
-    @PostMapping("/usuarios")
+    @PostMapping("/nuevo")
     public ResponseEntity<UsuarioDTO> addUsuario(@RequestParam UsuarioDTO usuarioDTO) {
         Usuario usuario = convertToEntity(usuarioDTO);
 
@@ -70,8 +73,8 @@ public class usuariosController {
         return new ResponseEntity<>(nuevoUsuarioDTO, HttpStatus.CREATED);
     }
 
-    @PutMapping("/edificios/{edificioId}")
-    public ResponseEntity<?> updateEdificio(@PathVariable Long usuarioId, @RequestBody UsuarioDTO usuarioDTO) {
+    @PutMapping("/usuarios/{usuarioId}")
+    public ResponseEntity<?> updateUsuario(@PathVariable Long usuarioId, @RequestBody UsuarioDTO usuarioDTO) {
         Usuario usuarioOld = usuarioService.findById(usuarioId);
 
         if(usuarioOld == null){
