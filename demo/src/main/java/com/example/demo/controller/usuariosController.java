@@ -19,7 +19,7 @@ public class usuariosController {
 
     private IUsuarioService usuarioService;
 
-    @GetMapping("/usuariosTodos")
+    @GetMapping("/usuarios/todos")
     public List<UsuarioDTO> findAll() {
         List<Usuario> usuarios = usuarioService.findAll();
         List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
@@ -48,7 +48,7 @@ public class usuariosController {
     }
 
 
-    @GetMapping("/usuariosParam")
+    @GetMapping("/usuarios_Param")
     public ResponseEntity<?> getUsuarioParam(@RequestParam("usuarioId") Long usuarioId) {
         Usuario usuario = usuarioService.findById(usuarioId);
 
@@ -62,7 +62,7 @@ public class usuariosController {
 
     }
 
-    @PostMapping("/nuevo")
+    @PostMapping("/usuarios/nuevo")
     public ResponseEntity<UsuarioDTO> addUsuario(@RequestParam UsuarioDTO usuarioDTO) {
         Usuario usuario = convertToEntity(usuarioDTO);
 

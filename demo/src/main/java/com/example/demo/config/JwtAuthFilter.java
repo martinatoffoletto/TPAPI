@@ -68,6 +68,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private boolean validateToken(String token) {
         try {
+
+            //valida el token
             Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
 
             // Verifica la firma y la expiración del token

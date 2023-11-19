@@ -21,6 +21,7 @@ import java.util.Date;
 public class IngresoController {
     private final int EXPIRATION_TIME_IN_MIN = 1;
 
+
     private IUsuarioService usuarioService;
 
     @Autowired

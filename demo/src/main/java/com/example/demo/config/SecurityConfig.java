@@ -27,10 +27,12 @@ public class SecurityConfig {
         return http.build();
     }
 
+    //puedo acceder a estos sin autorización
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("saludos/hola", "auth/login");
+        return (web) -> web.ignoring().requestMatchers("TPApi/templates/index", "auth/login", "registroAdmin", "registroDueInqui");
     }
+
 
     @Bean
     public JwtAuthFilter jwtAuth() {
@@ -39,13 +41,6 @@ public class SecurityConfig {
 
     @Bean
     public SecretKey secretKey() {
-        SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-        byte[] encodedKey = secretKey.getEncoded();
-        String encodedKeyBase64 = Base64.getEncoder().encodeToString(encodedKey);
-
-        // Registro de la clave secreta (solo para fines de depuración)
-        System.out.println("Secret Key (Base64): " + encodedKeyBase64);
-
-        return secretKey;
+        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 }

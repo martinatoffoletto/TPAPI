@@ -27,7 +27,7 @@ public class UsuarioDAOImpl implements daos{
         Session currentSession = entityManager.unwrap(Session.class);
 
         Query<Usuario> theQuery = currentSession.createQuery("FROM Usuario WHERE nombreUsuario=:username", Usuario.class);
-        theQuery.setParameter("username", username);
+        theQuery.setParameter("nombreUsuario", username);
 
         Usuario user = theQuery.uniqueResult();
 
@@ -39,21 +39,9 @@ public class UsuarioDAOImpl implements daos{
     }
 
 
-    public Usuario encontrarPorNombreUser(String nombreU){
-        Session currentSession = entityManager.unwrap(Session.class);
-
-        Query<Usuario> theQuery = currentSession.createQuery("FROM Usuario WHERE nombreUsuario=:nombreU", Usuario.class);
-        theQuery.setParameter("nombreU", nombreU);
-
-        return theQuery.uniqueResult();
-    }
-
     private boolean checkPassword(String password, String passwordDB){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        //String hashedPassword = passwordEncoder.encode(password);
-        System.out.println("Password: " + password);
-        //System.out.println("hashedPassword: " + hashedPassword);
-        System.out.println("passwordDB" + passwordDB);
+        String hashedPassword = passwordEncoder.encode(password);
         boolean isPasswordMatch = passwordEncoder.matches(password, passwordDB);
 
         return isPasswordMatch;
