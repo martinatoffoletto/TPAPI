@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.entity.UsuarioDTO;
 import com.example.demo.service.IUsuarioService;
+import com.example.demo.service.UsuarioServiceImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
