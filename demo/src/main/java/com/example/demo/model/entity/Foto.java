@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 @Embeddable
 public class Foto {
-    private Long id_foto;
 
     @Lob
     @Column(

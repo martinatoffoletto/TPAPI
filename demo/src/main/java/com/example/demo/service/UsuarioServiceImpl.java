@@ -21,6 +21,10 @@ public class UsuarioServiceImpl implements IUsuarioService{
     }
 
 
+    public Usuario findByUsuario(String nombreUser, String contra) {
+        return usuarioDAO.encontrarUsuario(nombreUser, contra);
+    }
+
     public void save(Usuario usuario){
         usuarioDAO.save(usuario);
     }

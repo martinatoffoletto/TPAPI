@@ -11,7 +11,7 @@ public interface IUsuarioService {
 
     public Usuario findById(Long id);
 
-
+    public Usuario findByUsuario(String nombreUser, String contra);
     public void save(Usuario usuario);
 
     public void update(Long usuarioId, Usuario usuario);

@@ -38,6 +38,16 @@ public class UsuarioDAOImpl implements daos{
         }
     }
 
+
+    public Usuario encontrarPorNombreUser(String nombreU){
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Usuario> theQuery = currentSession.createQuery("FROM Usuario WHERE nombreUsuario=:nombreU", Usuario.class);
+        theQuery.setParameter("nombreU", nombreU);
+
+        return theQuery.uniqueResult();
+    }
+
     private boolean checkPassword(String password, String passwordDB){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         //String hashedPassword = passwordEncoder.encode(password);
