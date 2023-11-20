@@ -29,13 +29,13 @@ public class SecurityConfig {
         http.authorizeHttpRequests(
                         (authz) -> authz.anyRequest().authenticated())
                 .addFilterBefore(jwtAuth(), UsernamePasswordAuthenticationFilter.class);
-        return http.formLogin(withDefaults()).build();
+        return http.build();
     }
 
     //puedo acceder a estos sin autorización
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("auth/login");
+        return (web) -> web.ignoring().requestMatchers("auth/login", "auth/registro");
     }
 
 

@@ -4,11 +4,12 @@ import com.example.demo.model.dao.ReclamoDAOImpl;
 import com.example.demo.model.entity.EstadoReclamo;
 import com.example.demo.model.entity.Foto;
 import com.example.demo.model.entity.Reclamo;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 import java.util.Collections;
-
+@Service
 public class ReclamoServiceImpl implements IReclamoService{
     private ReclamoDAOImpl reclamoDAO;
 

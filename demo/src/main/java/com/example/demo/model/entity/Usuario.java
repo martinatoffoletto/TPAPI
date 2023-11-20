@@ -5,16 +5,17 @@ import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuarios_tabla")
+@Table(name = "usuarios_tabla", uniqueConstraints = {@UniqueConstraint(columnNames = {"nombre_usuario"})})
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @PrimaryKeyJoinColumn(name = "id_usuario")
     @Column(name="id_usuario", nullable=false)
     private Long id;
     private String nombre;
     private String apellido;
     private int dni;
+    @Column(name="nombre_usuario", nullable = false)
     private String nombreUsuario;
     private String contrasenia;
     private TipoUsuario tipoUsuario;

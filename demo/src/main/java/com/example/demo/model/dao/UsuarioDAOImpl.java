@@ -1,8 +1,10 @@
 package com.example.demo.model.dao;
 
 import com.example.demo.model.entity.Unidad;
+import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,28 +25,20 @@ public class UsuarioDAOImpl implements daos{
 
 
     @Transactional(readOnly = true)
-    public Usuario encontrarUsuario(String username, String password) {
+    public Usuario encontrarUsuario(String nombre_usuario, String contrasenia) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Usuario> theQuery = currentSession.createQuery("FROM Usuario WHERE nombreUsuario=:username", Usuario.class);
-        theQuery.setParameter("nombreUsuario", username);
+        Query<Usuario> theQuery = currentSession.createQuery("SELECT u FROM Usuario u WHERE u.nombre_usuario=:nombre_usuario AND u.contrasenia=:contrasenia", Usuario.class);
+        theQuery.setParameter("nombre_usuario", nombre_usuario);
+        theQuery.setParameter("contrasenia", contrasenia);
 
-        Usuario user = theQuery.uniqueResult();
-
-        if(user != null && checkPassword(password, user.getContrasenia())){
-            return user;
-        }else {
-            return null;
-        }
+        return theQuery.uniqueResult();
     }
 
 
     private boolean checkPassword(String password, String passwordDB){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(password);
-        boolean isPasswordMatch = passwordEncoder.matches(password, passwordDB);
-
-        return isPasswordMatch;
+        return passwordEncoder.matches(password, passwordDB);
     }
 
 

@@ -1,15 +1,21 @@
 package com.example.demo.service;
 
-import com.example.demo.model.dao.EdificioDAOImpl;
 import com.example.demo.model.dao.UsuarioDAOImpl;
-import com.example.demo.model.entity.Edificio;
 import com.example.demo.model.entity.Usuario;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-
+@Service
 public class UsuarioServiceImpl implements IUsuarioService{
+
     private UsuarioDAOImpl usuarioDAO;
+
+    public UsuarioServiceImpl(UsuarioDAOImpl usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
+    }
+
+
     public List<Usuario> findAll(){
         List<Usuario> usuarios = Collections.singletonList((Usuario) usuarioDAO.gelAll());
         return usuarios;

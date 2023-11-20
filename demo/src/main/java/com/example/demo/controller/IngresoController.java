@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.model.dao.UsuarioDAOImpl;
+import com.example.demo.model.entity.Usuario;
 import com.example.demo.model.entity.UsuarioDTO;
 import com.example.demo.service.IUsuarioService;
 import com.example.demo.service.UsuarioServiceImpl;
@@ -19,10 +21,16 @@ import java.util.Date;
 public class IngresoController {
     private final int EXPIRATION_TIME_IN_MIN = 1;
 
+
+    @Autowired
     private IUsuarioService usuarioService;
 
     @Autowired
     private SecretKey secretKey;
+
+    @Autowired
+    private UsuarioDAOImpl usuarioDAO;
+
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UsuarioDTO credentials) {
@@ -35,6 +43,32 @@ public class IngresoController {
         }else{
             return new ResponseEntity<>("Credenciales inválidas", HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @PostMapping(value = "/registro")
+    public ResponseEntity<String> registro(@RequestBody UsuarioDTO credenciales){
+
+        Usuario usuario = new Usuario(credenciales.getNombreUsuario(), credenciales.getApellido(), credenciales.getDni(), credenciales.getNombreUsuario(),
+                credenciales.getContrasenia(), credenciales.getTipoUsuario());
+
+
+        //hay que ponerlo así en json
+        //{
+        //    "Nombre":"Lara",
+        //    "apellido":"Jean",
+        //    "dni":19876345,
+        //    "nombreUsuario":"larajean",
+        //    "contrasenia":"1234",
+        //    "tipoUsuario":"DUENIO"
+        //}
+
+        usuarioDAO.save(usuario);
+
+
+        String token = Jwts.builder().setSubject(credenciales.getNombreUsuario())
+                .setIssuedAt(new Date()).setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME_IN_MIN * 60 * 1000))
+                .signWith(secretKey, SignatureAlgorithm.HS256).compact();;
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
 

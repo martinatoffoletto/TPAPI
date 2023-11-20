@@ -39,8 +39,8 @@ public class EdificioDAOImpl implements daos{
     public Object findById(Long id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Edificio> theQuery = currentSession.createQuery("FROM Edificio WHERE direccion=:direccion", Edificio.class);
-        theQuery.setParameter("direccion", id);
+        Query<Edificio> theQuery = currentSession.createQuery("FROM Edificio WHERE id=:id", Edificio.class);
+        theQuery.setParameter("id", id);
 
         Edificio edificio = theQuery.uniqueResult();
 
