@@ -52,6 +52,7 @@ public class IngresoController {
                 credenciales.getContrasenia(), credenciales.getTipoUsuario());
 
 
+
         //hay que ponerlo así en json
         //{
         //    "Nombre":"Lara",

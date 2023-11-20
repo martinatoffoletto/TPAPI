@@ -19,6 +19,7 @@ public class Usuario {
     private String nombreUsuario;
     private String contrasenia;
     private TipoUsuario tipoUsuario;
+    private boolean aceptado;
 
     public Usuario() {
     }
@@ -30,6 +31,7 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
         this.contrasenia = contrasenia;
         this.tipoUsuario = tipoUsuario;
+        this.aceptado=false;
     }
 
     public Long getId() {
@@ -86,6 +88,14 @@ public class Usuario {
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public boolean isAceptado() {
+        return aceptado;
+    }
+
+    public void setAceptado(boolean aceptado) {
+        this.aceptado = aceptado;
     }
 
     @Override

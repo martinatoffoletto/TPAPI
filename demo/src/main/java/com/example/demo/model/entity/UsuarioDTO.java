@@ -7,6 +7,7 @@ public class UsuarioDTO {
     private String nombreUsuario;
     private String contrasenia;
     private TipoUsuario tipoUsuario;
+    private boolean aceptado;
 
     public UsuarioDTO(String nombre, String apellido, int dni, String nombreUsuario, String contrasenia, TipoUsuario tipoUsuario) {
         this.nombre = nombre;
@@ -15,6 +16,7 @@ public class UsuarioDTO {
         this.nombreUsuario = nombreUsuario;
         this.contrasenia = contrasenia;
         this.tipoUsuario = tipoUsuario;
+
     }
 
     public UsuarioDTO() {
@@ -66,5 +68,13 @@ public class UsuarioDTO {
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public boolean isAceptado() {
+        return aceptado;
+    }
+
+    public void setAceptado(boolean aceptado) {
+        this.aceptado = aceptado;
     }
 }
