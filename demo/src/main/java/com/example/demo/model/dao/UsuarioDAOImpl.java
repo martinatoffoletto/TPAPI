@@ -25,11 +25,11 @@ public class UsuarioDAOImpl implements daos{
 
 
     @Transactional(readOnly = true)
-    public Usuario encontrarUsuario(String nombre_usuario, String contrasenia) {
+    public Usuario encontrarUsuario(String nombreUsuario, String contrasenia) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Usuario> theQuery = currentSession.createQuery("SELECT u FROM Usuario u WHERE u.nombre_usuario=:nombre_usuario AND u.contrasenia=:contrasenia", Usuario.class);
-        theQuery.setParameter("nombre_usuario", nombre_usuario);
+        Query<Usuario> theQuery = currentSession.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario=:nombreUsuario AND u.contrasenia=:contrasenia", Usuario.class);
+        theQuery.setParameter("nombreUsuario", nombreUsuario);
         theQuery.setParameter("contrasenia", contrasenia);
 
         return theQuery.uniqueResult();
