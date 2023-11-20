@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 
+import com.example.demo.model.entity.AreaComun;
 import com.example.demo.model.entity.Reclamo;
 
 
@@ -16,4 +17,10 @@ public interface IReclamoService {
     public void update(Long reclamoId, Reclamo reclamo);
 
     public void deleteById(Long id);
+
+    public List<Reclamo> findPorEdificio(Long idEdificio);
+
+    public List<Reclamo> findPorUsuario(String nombreUsuario);
+
+
 }

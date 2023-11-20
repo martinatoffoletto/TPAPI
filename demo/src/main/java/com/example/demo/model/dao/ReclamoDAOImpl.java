@@ -1,18 +1,19 @@
 package com.example.demo.model.dao;
 
-import com.example.demo.model.entity.Usuario;
+import com.example.demo.model.entity.*;
+import com.example.demo.service.EdificioServiceImpl;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.model.entity.Reclamo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 
 import com.example.demo.model.entity.Reclamo;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -71,4 +72,45 @@ public class ReclamoDAOImpl implements daos{
         theQuery.executeUpdate();
 
     }
+
+
+    @Transactional
+    public List<Reclamo> findByEdificio(Long idEdificio){
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query theQuery = currentSession.createQuery("FROM Reclamo WHERE areaComun.edificio.id=:idEdificio OR unidad.edificio.id=:idEdificio");
+        theQuery.setParameter("idEdificio", idEdificio);
+        List<?> resultList = theQuery.getResultList();
+
+        List<Reclamo> reclamosList = new ArrayList<>();
+        for (Object obj : resultList) {
+            if (obj instanceof Reclamo) {
+                reclamosList.add((Reclamo) obj);
+            }
+        }
+
+        return reclamosList;
+    }
+
+    @Transactional
+    public List<Reclamo> findByUsuario(String nombreUsuario){
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query theQuery = currentSession.createQuery("FROM Reclamo WHERE usuario.nombreUsuario=:nombreUsuario");
+        theQuery.setParameter("nombreUsuario", nombreUsuario);
+        List<?> resultList = theQuery.getResultList();
+
+        List<Reclamo> reclamoList = new ArrayList<>();
+        for (Object obj : resultList){
+            if (obj instanceof Reclamo) {
+                reclamoList.add((Reclamo) obj);
+            }
+        }
+
+        return reclamoList;
+    }
+
+
+
+
 }

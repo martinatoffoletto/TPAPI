@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.entity.Reclamo;
-import com.example.demo.model.entity.ReclamoDTO;
-import com.example.demo.model.entity.UsuarioDTO;
+import com.example.demo.model.entity.*;
 import com.example.demo.service.IReclamoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -59,6 +57,40 @@ public class reclamosController {
         return new ResponseEntity<>(reclamoDTO, HttpStatus.OK);
 
     }
+
+
+    //este mapea por edificio
+    @GetMapping("/reclamosEdificio/{edificioId}")
+    public List<ReclamoDTO> reclamosEdificio(@PathVariable Long edificioId){
+        List<Reclamo> reclamos = reclamoService.findPorEdificio(edificioId);
+        List<ReclamoDTO> reclamosDTOS = new ArrayList<>();
+
+        for (Reclamo reclamo : reclamos){
+            ReclamoDTO reclamoDTO = convertToDTO(reclamo);
+            reclamosDTOS.add(reclamoDTO);
+        }
+
+        return reclamosDTOS;
+    }
+
+
+    @GetMapping("/reclamosUsuario/{nombreUsuario}")
+    public List<ReclamoDTO> reclamosUsuario(@PathVariable String nombreUsuario){
+        List<Reclamo> reclamos = reclamoService.findPorUsuario(nombreUsuario);
+        List<ReclamoDTO> reclamosDTOS = new ArrayList<>();
+
+        for (Reclamo reclamo : reclamos){
+            ReclamoDTO reclamoDTO = convertToDTO(reclamo);
+            reclamosDTOS.add(reclamoDTO);
+        }
+
+        return reclamosDTOS;
+    }
+
+
+
+
+
 
     @PostMapping("/reclamos")
     public ResponseEntity<ReclamoDTO> addReclamo(@RequestParam ReclamoDTO reclamoDTO) {

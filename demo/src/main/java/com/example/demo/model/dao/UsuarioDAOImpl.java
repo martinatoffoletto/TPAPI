@@ -89,4 +89,13 @@ public class UsuarioDAOImpl implements daos{
         theQuery.executeUpdate();
 
     }
+
+
+
+
+
+
+
+
+
 }
