@@ -26,18 +26,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        return http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(authRequest ->
-                authRequest.requestMatchers("/auth/**").permitAll()
-                        .anyRequest().authenticated()
-                ).formLogin(withDefaults()).build();
+        http.authorizeHttpRequests(
+                        (authz) -> authz.anyRequest().authenticated())
+                .addFilterBefore(jwtAuth(), UsernamePasswordAuthenticationFilter.class);
+        return http.formLogin(withDefaults()).build();
     }
 
     //puedo acceder a estos sin autorización
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("TPApi/templates/index");
+        return (web) -> web.ignoring().requestMatchers("edificios");
     }
 
 
