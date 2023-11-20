@@ -1,16 +1,17 @@
 package com.example.demo.model.dao;
 
+import com.example.demo.model.entity.Edificio;
+import com.example.demo.model.entity.Unidad;
 import com.example.demo.model.entity.Usuario;
+import com.example.demo.service.EdificioServiceImpl;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-
-import com.example.demo.model.entity.Unidad;
-
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,4 +69,31 @@ public class UnidadDAOImpl implements daos{
         theQuery.executeUpdate();
 
     }
+
+
+    @Transactional
+    public List<Unidad> findByEdificio(Long idEdificio){
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        EdificioServiceImpl edificioService = new EdificioServiceImpl();
+        Edificio edificio= edificioService.findById(idEdificio);
+
+
+        Query theQuery = currentSession.createQuery("FROM Unidad WHERE edificio=:edificio");
+        theQuery.setParameter("edificio", edificio);
+
+
+        List<?> resultList = theQuery.getResultList();
+
+        List<Unidad> unidadList = new ArrayList<>();
+        for (Object obj : resultList) {
+            if (obj instanceof Unidad) {
+                unidadList.add((Unidad) obj);
+            }
+        }
+
+        return unidadList;
+    }
+
+
 }

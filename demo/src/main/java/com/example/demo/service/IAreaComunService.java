@@ -14,4 +14,6 @@ public interface IAreaComunService {
     public void update(Long areaComunId, AreaComun areaComun);
     public void deleteById(Long id);
 
+    public List<AreaComun> findPorEdificio(Long idEdificio);
+
 }

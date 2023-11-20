@@ -60,6 +60,23 @@ public class AreaComunController {
     }
 
 
+    //este mapea por edificio
+    @GetMapping("/areasComunesEdificio/{edificioId}")
+    public List<AreaComunDTO> areaComunEdificio(@PathVariable Long edificioId){
+        List<AreaComun> areasComunes = areaComunService.findPorEdificio(edificioId);
+        List<AreaComunDTO> acDTOS = new ArrayList<>();
+
+        for (AreaComun areaComun : areasComunes){
+            AreaComunDTO areaComunDTO = convertToDTO(areaComun);
+            acDTOS.add(areaComunDTO);
+        }
+
+        return acDTOS;
+    }
+
+
+
+
     @PostMapping("/areaComun")
     public ResponseEntity<AreaComunDTO> addAreaComun(@RequestParam AreaComunDTO areaComunDTO) {
         AreaComun areaComun = convertToEntity(areaComunDTO);

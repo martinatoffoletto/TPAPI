@@ -1,6 +1,8 @@
 package com.example.demo.model.dao;
 
+import com.example.demo.model.entity.Edificio;
 import com.example.demo.model.entity.Usuario;
+import com.example.demo.service.EdificioServiceImpl;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -10,6 +12,7 @@ import com.example.demo.model.entity.AreaComun;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -64,6 +67,29 @@ public class AreaComunDAOImpl implements daos{
         theQuery.setParameter("idAreaComun", id);
         theQuery.executeUpdate();
 
+    }
+
+    @Transactional
+    public List<AreaComun> findByEdificio(Long idEdificio){
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        EdificioServiceImpl edificioService = new EdificioServiceImpl();
+        Edificio edificio= edificioService.findById(idEdificio);
+
+
+
+        Query theQuery = currentSession.createQuery("FROM AreaComun WHERE edificio=:edificio");
+        theQuery.setParameter("edificio", edificio);
+        List<?> resultList = theQuery.getResultList();
+
+        List<AreaComun> areaComunList = new ArrayList<>();
+        for (Object obj : resultList) {
+            if (obj instanceof AreaComun) {
+                areaComunList.add((AreaComun) obj);
+            }
+        }
+
+        return areaComunList;
     }
 
 

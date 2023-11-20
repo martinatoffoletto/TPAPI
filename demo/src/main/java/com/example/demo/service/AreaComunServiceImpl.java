@@ -49,4 +49,9 @@ public class AreaComunServiceImpl implements IAreaComunService{
     public void deleteById(Long id) {
         areaComunDAO.delete(id);
     }
+
+    @Override
+    public List<AreaComun> findPorEdificio(Long idEdificio) {
+        return Collections.singletonList((AreaComun) areaComunDAO.findByEdificio(idEdificio));
+    }
 }

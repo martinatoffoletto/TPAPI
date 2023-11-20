@@ -62,6 +62,25 @@ public class UnidadController {
 
     }
 
+
+
+    //este mapea por edificio
+    @GetMapping("/unidadesEdificio/{edificioId}")
+    public List<UnidadDTO> unidadesEdificio(@PathVariable Long edificioId){
+        List<Unidad> unidades = unidadService.findPorEdificio(edificioId);
+        List<UnidadDTO> unidadesDTOS = new ArrayList<>();
+
+        for (Unidad unidad : unidades){
+            UnidadDTO unidadDTO = convertToDTO(unidad);
+            unidadesDTOS.add(unidadDTO);
+        }
+
+        return unidadesDTOS;
+    }
+
+
+
+
     @PostMapping("/unidades")
     public ResponseEntity<UnidadDTO> addUnidad(@RequestParam UnidadDTO unidadDTO) {
         Unidad unidad = convertToEntity(unidadDTO);

@@ -52,4 +52,9 @@ public class UnidadServiceImpl implements IUnidadService{
     public void deleteById(Long id) {
         unidadDAO.delete(id);
     }
+
+    @Override
+    public List<Unidad> findPorEdificio(Long idEdificio) {
+        return Collections.singletonList((Unidad) unidadDAO.findByEdificio(idEdificio));
+    }
 }
