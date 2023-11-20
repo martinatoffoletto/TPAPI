@@ -53,6 +53,8 @@ public class UnidadDTO {
         return edificio.toString();
     }
 
+    public Edificio getEdificio1(){ return edificio;}
+
     public void setEdificio(Edificio edificio) {
         this.edificio = edificio;
     }
@@ -60,6 +62,7 @@ public class UnidadDTO {
     public String getUsuario() {
         return usuario.toString();
     }
+    public Usuario getUsuario1(){return usuario;}
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
