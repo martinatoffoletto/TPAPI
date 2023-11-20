@@ -90,8 +90,6 @@ public class reclamosController {
 
 
 
-
-
     @PostMapping("/reclamos")
     public ResponseEntity<ReclamoDTO> addReclamo(@RequestParam ReclamoDTO reclamoDTO) {
         Reclamo reclamo = convertToEntity(reclamoDTO);

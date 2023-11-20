@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.crypto.SecretKey;
 import java.util.Date;
 
+
 @RestController
 @RequestMapping(value = "/auth", method = RequestMethod.GET)
 public class IngresoController {
@@ -53,8 +54,6 @@ public class IngresoController {
         Usuario usuario = new Usuario(credenciales.getNombreUsuario(), credenciales.getApellido(), credenciales.getDni(), credenciales.getNombreUsuario(),
                 credenciales.getContrasenia(), credenciales.getTipoUsuario());
 
-        usuario.isAceptado()=false;
-
         //hay que ponerlo así en json
         //{
         //    "Nombre":"Lara",
@@ -66,10 +65,7 @@ public class IngresoController {
         //}
 
         usuarioDAO.save(usuario);
-        List<Usuario> admins = usuarioService.findAdmins();
-        for (Usuario usuario1 : admins){
-            usuario1.getIngresosPendientes().add(usuario);
-        }
+
 
 
         String token = Jwts.builder().setSubject(credenciales.getNombreUsuario())

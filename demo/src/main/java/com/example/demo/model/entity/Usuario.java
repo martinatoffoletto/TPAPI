@@ -22,10 +22,9 @@ public class Usuario {
     private String nombreUsuario;
     private String contrasenia;
     private TipoUsuario tipoUsuario;
-    private boolean aceptado;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-    private List<Usuario> ingresosPendientes;
+
+
 
     public Usuario() {
     }
@@ -38,10 +37,6 @@ public class Usuario {
         this.contrasenia = contrasenia;
         this.tipoUsuario = tipoUsuario;
 
-
-        if(this.tipoUsuario==ADMINISTRADOR){
-            this.ingresosPendientes = new ArrayList<Usuario>();
-        }
     }
 
     public Long getId() {
@@ -100,22 +95,7 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public boolean isAceptado() {
-        return aceptado;
-    }
 
-    public void setAceptado(boolean aceptado) {
-        this.aceptado = aceptado;
-    }
-
-
-    public List<Usuario> getIngresosPendientes() {
-        return ingresosPendientes;
-    }
-
-    public void setIngresosPendientes(List<Usuario> ingresosPendientes) {
-        this.ingresosPendientes = ingresosPendientes;
-    }
 
     @Override
     public String toString() {

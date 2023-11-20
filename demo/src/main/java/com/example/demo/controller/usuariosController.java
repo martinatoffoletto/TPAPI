@@ -105,27 +105,6 @@ public class usuariosController {
     }
 
 
-    @PostMapping("/usuarios/solicitudes")
-    public ResponseEntity<String> aceptarUsuario(@RequestParam UsuarioDTO usuarioDTO, @RequestParam UsuarioDTO usuarioAceptar) {
-        Usuario usuarioAd = convertToEntity(usuarioDTO);
-        Usuario usuarioAc = convertToEntity(usuarioAceptar);
-
-        if(Objects.equals(usuarioAd.getTipoUsuario().toString(), "ADMINISTRADOR")){
-            usuarioAc.setAceptado(true);
-            List<Usuario> admins = usuarioService.findAdmins();
-            for(Usuario admin : admins){
-                admin.getIngresosPendientes().remove(usuarioAc);
-            }
-            return new ResponseEntity<>("Usuario aceptado con éxito", HttpStatus.CREATED);
-        }else{
-            return new ResponseEntity<>("No tiene los permisos para esta función", HttpStatus.CREATED);
-        }
-
-
-    }
-
-
-
 
 
     private Usuario convertToEntity(UsuarioDTO usuarioDTO) {
