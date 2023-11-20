@@ -31,6 +31,11 @@ public class UsuarioServiceImpl implements IUsuarioService{
         return usuarioDAO.encontrarUsuario(nombreUser, contra);
     }
 
+    @Override
+    public List<Usuario> findAdmins() {
+        return usuarioDAO.getAdmins();
+    }
+
     public void save(Usuario usuario){
         usuarioDAO.save(usuario);
     }

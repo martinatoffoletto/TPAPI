@@ -6,10 +6,7 @@ import com.example.demo.model.entity.Edificio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AreaComunServiceImpl implements IAreaComunService{
@@ -52,6 +49,6 @@ public class AreaComunServiceImpl implements IAreaComunService{
 
     @Override
     public List<AreaComun> findPorEdificio(Long idEdificio) {
-        return Collections.singletonList((AreaComun) areaComunDAO.findByEdificio(idEdificio));
+        return areaComunDAO.findByEdificio(idEdificio);
     }
 }

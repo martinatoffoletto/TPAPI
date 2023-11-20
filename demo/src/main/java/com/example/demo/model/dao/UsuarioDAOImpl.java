@@ -61,6 +61,18 @@ public class UsuarioDAOImpl implements daos{
         return usuario;
     }
 
+    @Transactional(readOnly = true)
+    public List<Usuario> getAdmins() {
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Usuario> getQuery = currentSession.createQuery("from Usuario where tipoUsuario='ADMINISTRADOR'", Usuario.class);
+
+        return getQuery.getResultList();
+    }
+
+
+
+
 
     @Override
     @Transactional

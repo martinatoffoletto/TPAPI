@@ -1,8 +1,11 @@
 package com.example.demo.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
+
+import static com.example.demo.model.entity.TipoUsuario.ADMINISTRADOR;
 
 @Entity
 @Table(name = "usuarios_tabla", uniqueConstraints = {@UniqueConstraint(columnNames = {"nombre_usuario"})})
@@ -21,6 +24,9 @@ public class Usuario {
     private TipoUsuario tipoUsuario;
     private boolean aceptado;
 
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private List<Usuario> ingresosPendientes;
+
     public Usuario() {
     }
 
@@ -31,7 +37,11 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
         this.contrasenia = contrasenia;
         this.tipoUsuario = tipoUsuario;
-        this.aceptado=false;
+
+
+        if(this.tipoUsuario==ADMINISTRADOR){
+            this.ingresosPendientes = new ArrayList<Usuario>();
+        }
     }
 
     public Long getId() {
@@ -96,6 +106,15 @@ public class Usuario {
 
     public void setAceptado(boolean aceptado) {
         this.aceptado = aceptado;
+    }
+
+
+    public List<Usuario> getIngresosPendientes() {
+        return ingresosPendientes;
+    }
+
+    public void setIngresosPendientes(List<Usuario> ingresosPendientes) {
+        this.ingresosPendientes = ingresosPendientes;
     }
 
     @Override

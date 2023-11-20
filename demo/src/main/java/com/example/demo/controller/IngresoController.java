@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 
 import com.example.demo.model.dao.UsuarioDAOImpl;
+import com.example.demo.model.entity.Unidad;
+import com.example.demo.model.entity.UnidadDTO;
 import com.example.demo.model.entity.Usuario;
 import com.example.demo.model.entity.UsuarioDTO;
 import com.example.demo.service.IUsuarioService;
@@ -51,7 +53,7 @@ public class IngresoController {
         Usuario usuario = new Usuario(credenciales.getNombreUsuario(), credenciales.getApellido(), credenciales.getDni(), credenciales.getNombreUsuario(),
                 credenciales.getContrasenia(), credenciales.getTipoUsuario());
 
-
+        usuario.isAceptado()=false;
 
         //hay que ponerlo así en json
         //{
@@ -64,6 +66,10 @@ public class IngresoController {
         //}
 
         usuarioDAO.save(usuario);
+        List<Usuario> admins = usuarioService.findAdmins();
+        for (Usuario usuario1 : admins){
+            usuario1.getIngresosPendientes().add(usuario);
+        }
 
 
         String token = Jwts.builder().setSubject(credenciales.getNombreUsuario())
