@@ -20,7 +20,7 @@ import java.util.Date;
 
 
 @RestController
-@RequestMapping(value = "/auth", method = RequestMethod.GET)
+@RequestMapping("/")
 public class IngresoController {
     private final int EXPIRATION_TIME_IN_MIN = 1;
 
@@ -33,6 +33,11 @@ public class IngresoController {
 
     @Autowired
     private UsuarioDAOImpl usuarioDAO;
+
+    @GetMapping("/index")
+    public String index(){
+        return "index";
+    }
 
 
     @PostMapping("/login")

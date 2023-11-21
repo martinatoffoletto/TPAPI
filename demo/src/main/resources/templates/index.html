@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +12,7 @@
     <main>
         <section class="container">
             <h1>Sitio de reclamos</h1>
-            <form id="login-form" method="post" >
+            <form id="login-form" action="/login" method="post" >
                 <div class="mb-3">
                     <label for="nombreUsuario" class="form-label">Nombre de Usuario:</label>
                     <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required>
@@ -21,7 +22,7 @@
                     <input type="password" class="form-control" id="contrasenia" name="contrasenia" required>
                 </div>
                 <div class="d-grid gap-2 mb-3">
-                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                    <button type="submit" class="btn btn-primary" >Iniciar Sesión</button>
                 </div>
                 <div class="text-center">
                     <button type="button" class="btn btn-link" id="show-register-form" onclick="showRegisterForm()">Regístrate</button>
