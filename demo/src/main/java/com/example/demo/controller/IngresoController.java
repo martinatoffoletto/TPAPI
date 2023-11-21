@@ -48,6 +48,8 @@ public class IngresoController {
         }
     }
 
+    
+
     @PostMapping(value = "/registro")
     public ResponseEntity<String> registro(@RequestBody UsuarioDTO credenciales){
 
