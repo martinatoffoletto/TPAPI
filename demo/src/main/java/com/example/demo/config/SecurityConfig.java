@@ -35,7 +35,7 @@ public class SecurityConfig {
     //puedo acceder a estos sin autorización
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("auth/login", "auth/registro");
+        return (web) -> web.ignoring().requestMatchers("/index", "/registro", "/", "/login");
     }
 
 
