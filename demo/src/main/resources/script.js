@@ -5,38 +5,33 @@ function showRegisterForm() {
 
 
 function submitForm(event) {
-    event.preventDefault();
+    event.preventDefault(); // Evitar la acción predeterminada del formulario
 
-    var nombreUsuario = document.getElementById("nombreUsuario").value;
-    var contrasenia = document.getElementById("contrasenia").value;
-
-    var credentials = {
-        nombreUsuario: nombreUsuario,
-        contrasenia: contrasenia
+    // Obtener los datos del formulario
+    var formData = {
+        nombreUsuario: document.getElementById('nombreUsuario').value,
+        contrasenia: document.getElementById('contrasenia').value
     };
 
-    fetch('http://localhost:8080/auth/login', {
+    // Realizar la solicitud POST al servidor
+    fetch('/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(credentials)
+        body: JSON.stringify(formData),
     })
     .then(response => {
         if (response.ok) {
-            return response.text();
+            // Si la respuesta es exitosa, redirigir a otra página con el token en la URL
+            window.location.href = 'misReclamos.html?token=' + response.text();
         } else {
-            throw new Error('Credenciales inválidas');
+            // Si la respuesta es un error, mostrar el mensaje de error
+            alert('Error: ' + response.text());
         }
     })
-    .then(token => {
-        alert("siii!")
-        // Manejar el token, por ejemplo, guardarlo en localStorage
-        console.log('Token recibido:', token);
-    })
     .catch(error => {
-        console.error('Error:', error.message);
-        alert('Credenciales inválidas');
+        console.error('Error:', error);
     });
 }
 

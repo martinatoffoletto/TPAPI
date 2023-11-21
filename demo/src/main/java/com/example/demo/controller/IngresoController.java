@@ -46,8 +46,8 @@ public class IngresoController {
             String token = Jwts.builder().setSubject(credentials.getNombreUsuario())
                     .setIssuedAt(new Date()).setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME_IN_MIN * 60 * 1000))
                     .signWith(secretKey, SignatureAlgorithm.HS256).compact();
-
             return new ResponseEntity<>(token, HttpStatus.OK);
+            
         }else{
             return new ResponseEntity<>("Credenciales inválidas", HttpStatus.UNAUTHORIZED);
         }
